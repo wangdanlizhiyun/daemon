@@ -1,0 +1,27 @@
+<manifest package="com.daemon_library"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application>
+        <service
+            android:name=".LocalService"
+            android:exported="true" />
+        <service
+            android:name=".LocalService$InnnerService"
+            android:exported="true" />
+
+        <service
+            android:name=".RemoteService"
+            android:exported="true"
+            android:process=":remote" />
+        <service
+            android:name=".RemoteService$InnnerService"
+            android:exported="true"
+            android:process=":remote" />
+
+        <service
+            android:name=".MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+    </application>
+</manifest>
