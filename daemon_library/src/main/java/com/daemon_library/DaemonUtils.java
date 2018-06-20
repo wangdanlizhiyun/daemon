@@ -25,9 +25,9 @@ public class DaemonUtils {
         }
         return false;
     }
-    public static void start(Activity activity){
-        activity.startService(new Intent(activity, LocalService.class));
-        activity.startService(new Intent(activity, RemoteService.class));
-        MyJobService.StartJob(activity);
+    public static void start(Context context){
+        context.startService(new Intent(context, LocalService.class));
+        context.startService(new Intent(context, RemoteService.class));
+        MyJobService.StartJob(context);
     }
 }

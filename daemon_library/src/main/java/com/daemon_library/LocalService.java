@@ -46,6 +46,17 @@ public class LocalService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             startService(new Intent(this, InnnerService.class));
         }
+        if (onCreateRunnable != null){
+            onCreateRunnable.run();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (onDestroyRunnable != null){
+            onDestroyRunnable.run();
+        }
     }
 
     @Override
@@ -87,5 +98,16 @@ public class LocalService extends Service {
         public IBinder onBind(Intent intent) {
             return null;
         }
+    }
+
+    Runnable onCreateRunnable;
+    Runnable onDestroyRunnable;
+
+    public void setOnCreateRunnable(Runnable onCreateRunnable) {
+        this.onCreateRunnable = onCreateRunnable;
+    }
+
+    public void setOnDestroyRunnable(Runnable onDestroyRunnable) {
+        this.onDestroyRunnable = onDestroyRunnable;
     }
 }
