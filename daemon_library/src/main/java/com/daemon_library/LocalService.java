@@ -46,17 +46,21 @@ public class LocalService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             startService(new Intent(this, InnnerService.class));
         }
-        if (DaemonUtils.sOnCreateRunnable != null){
-            DaemonUtils.sOnCreateRunnable.run();
+        if (DaemonUtils.sLocalServiceListener != null){
+            DaemonUtils.sLocalServiceListener.onCreate(this);
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (DaemonUtils.sOnDestroyRunnable != null){
-            DaemonUtils.sOnDestroyRunnable.run();
+        if (DaemonUtils.sLocalServiceListener != null){
+            DaemonUtils.sLocalServiceListener.onDestroy(this);
         }
+    }
+    public static interface LocalServiceListener{
+        void onCreate(Service service);
+        void onDestroy(Service service);
     }
 
     @Override

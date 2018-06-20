@@ -31,14 +31,9 @@ public class DaemonUtils {
         MyJobService.StartJob(context);
     }
 
-    static Runnable sOnCreateRunnable;
-    static Runnable sOnDestroyRunnable;
+    static LocalService.LocalServiceListener sLocalServiceListener;
 
-    public static void setOnCreateRunnable(Runnable onCreateRunnable) {
-        sOnCreateRunnable = onCreateRunnable;
-    }
-
-    public static void setOnDestroyRunnable(Runnable onDestroyRunnable) {
-        sOnDestroyRunnable = onDestroyRunnable;
+    public static void setLocalServiceListener(LocalService.LocalServiceListener sLocalServiceListener) {
+        DaemonUtils.sLocalServiceListener = sLocalServiceListener;
     }
 }
