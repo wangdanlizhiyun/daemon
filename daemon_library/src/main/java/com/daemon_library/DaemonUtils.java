@@ -30,4 +30,15 @@ public class DaemonUtils {
         context.startService(new Intent(context, RemoteService.class));
         MyJobService.StartJob(context);
     }
+
+    static Runnable sOnCreateRunnable;
+    static Runnable sOnDestroyRunnable;
+
+    public static void setOnCreateRunnable(Runnable onCreateRunnable) {
+        sOnCreateRunnable = onCreateRunnable;
+    }
+
+    public static void setOnDestroyRunnable(Runnable onDestroyRunnable) {
+        sOnDestroyRunnable = onDestroyRunnable;
+    }
 }
