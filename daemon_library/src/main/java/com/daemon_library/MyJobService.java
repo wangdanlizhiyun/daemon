@@ -41,7 +41,6 @@ public class MyJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        Log.e(TAG, "开启job");
         //如果7.0以上 轮训
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StartJob(this);
@@ -49,7 +48,6 @@ public class MyJobService extends JobService {
         boolean isLocalRun = DaemonUtils.isRunningService(this, LocalService.class.getName());
         boolean isRemoteRun = DaemonUtils.isRunningService(this, RemoteService.class.getName());
         if (!isLocalRun || !isRemoteRun) {
-            Log.e(TAG, "job  拉活");
             startService(new Intent(this, LocalService.class));
             startService(new Intent(this, RemoteService.class));
         }
