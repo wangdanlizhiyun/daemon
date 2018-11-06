@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.text.TextUtils;
 
 import java.util.List;
@@ -28,7 +29,11 @@ public class DaemonUtils {
     public static void start(Context context){
         context.startService(new Intent(context, LocalService.class));
         context.startService(new Intent(context, RemoteService.class));
-        MyJobService.StartJob(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            MyJobService.StartJob(context);
+        }else {
+            context.startService(new Intent(context,MyJobServiceBelow21.class));
+        }
     }
 
     static LocalService.LocalServiceListener sLocalServiceListener;
